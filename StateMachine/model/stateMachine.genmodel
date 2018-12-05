@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/StateMachine/src-gen" creationIcons="false" editDirectory="/StateMachine.edit/src-gen"
+    editorDirectory="/StateMachine.editor/src-gen" modelPluginID="StateMachine" modelName="StateMachine"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>stateMachine.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="StateMachine" disposableProviderFactory="true" ecorePackage="stateMachine.ecore#/">
+    <genClasses ecoreClass="stateMachine.ecore#//StateMachine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute stateMachine.ecore#//StateMachine/name"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference stateMachine.ecore#//StateMachine/state"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference stateMachine.ecore#//StateMachine/transition"/>
+    </genClasses>
+    <genClasses ecoreClass="stateMachine.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute stateMachine.ecore#//State/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference stateMachine.ecore#//State/targetOut"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference stateMachine.ecore#//State/fromIn"/>
+    </genClasses>
+    <genClasses ecoreClass="stateMachine.ecore#//Transition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute stateMachine.ecore#//Transition/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference stateMachine.ecore#//Transition/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference stateMachine.ecore#//Transition/target"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
