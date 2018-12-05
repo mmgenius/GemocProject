@@ -183,6 +183,15 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getState_Status() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransition() {
 		return transitionEClass;
 	}
@@ -252,6 +261,7 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 		createEAttribute(stateEClass, STATE__NAME);
 		createEReference(stateEClass, STATE__TARGET_OUT);
 		createEReference(stateEClass, STATE__FROM_IN);
+		createEAttribute(stateEClass, STATE__STATUS);
 
 		transitionEClass = createEClass(TRANSITION);
 		createEAttribute(transitionEClass, TRANSITION__NAME);
@@ -310,6 +320,8 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 		initEReference(getState_FromIn(), this.getTransition(), this.getTransition_Target(), "fromIn", null, 1, -1,
 				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Status(), ecorePackage.getEBoolean(), "status", null, 0, 1, State.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

@@ -33,6 +33,7 @@ import stateMachine.Transition;
  *   <li>{@link stateMachine.impl.StateImpl#getName <em>Name</em>}</li>
  *   <li>{@link stateMachine.impl.StateImpl#getTargetOut <em>Target Out</em>}</li>
  *   <li>{@link stateMachine.impl.StateImpl#getFromIn <em>From In</em>}</li>
+ *   <li>{@link stateMachine.impl.StateImpl#isStatus <em>Status</em>}</li>
  * </ul>
  *
  * @generated
@@ -77,6 +78,26 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	 * @ordered
 	 */
 	protected EList<Transition> fromIn;
+
+	/**
+	 * The default value of the '{@link #isStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATUS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean status = STATUS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -149,6 +170,28 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(boolean newStatus) {
+		boolean oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StateMachinePackage.STATE__STATUS, oldStatus,
+					status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -191,6 +234,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 			return getTargetOut();
 		case StateMachinePackage.STATE__FROM_IN:
 			return getFromIn();
+		case StateMachinePackage.STATE__STATUS:
+			return isStatus();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,6 +260,9 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 			getFromIn().clear();
 			getFromIn().addAll((Collection<? extends Transition>) newValue);
 			return;
+		case StateMachinePackage.STATE__STATUS:
+			setStatus((Boolean) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -236,6 +284,9 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 		case StateMachinePackage.STATE__FROM_IN:
 			getFromIn().clear();
 			return;
+		case StateMachinePackage.STATE__STATUS:
+			setStatus(STATUS_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -254,6 +305,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 			return targetOut != null && !targetOut.isEmpty();
 		case StateMachinePackage.STATE__FROM_IN:
 			return fromIn != null && !fromIn.isEmpty();
+		case StateMachinePackage.STATE__STATUS:
+			return status != STATUS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -271,6 +324,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", status: ");
+		result.append(status);
 		result.append(')');
 		return result.toString();
 	}

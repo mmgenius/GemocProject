@@ -12,11 +12,14 @@ StateMachine returns StateMachine:
 
 EString returns ecore::EString:
 	STRING | ID;
-
+	
+EBoolean returns ecore::EString:
+	INT | ID;
+	
 State returns State:
 	{State}
-	'State'	name=EString;
-
+	'State'	name=EString ;
+	
 Transition returns Transition:
 	{Transition}
 	'Transition' name=EString from=[State|EString] "->" target=[State|EString];

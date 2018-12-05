@@ -149,13 +149,22 @@ public interface StateMachinePackage extends EPackage {
 	int STATE__FROM_IN = 2;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__STATUS = 3;
+
+	/**
 	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = 3;
+	int STATE_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>State</em>' class.
@@ -308,6 +317,17 @@ public interface StateMachinePackage extends EPackage {
 	EReference getState_FromIn();
 
 	/**
+	 * Returns the meta object for the attribute '{@link stateMachine.State#isStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see stateMachine.State#isStatus()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_Status();
+
+	/**
 	 * Returns the meta object for class '{@link stateMachine.Transition <em>Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -440,6 +460,14 @@ public interface StateMachinePackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATE__FROM_IN = eINSTANCE.getState_FromIn();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__STATUS = eINSTANCE.getState_Status();
 
 		/**
 		 * The meta object literal for the '{@link stateMachine.impl.TransitionImpl <em>Transition</em>}' class.

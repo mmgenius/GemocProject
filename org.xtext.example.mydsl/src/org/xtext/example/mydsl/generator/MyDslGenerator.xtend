@@ -19,67 +19,138 @@ import stateMachine.Transition
  */
 class MyDslGenerator extends AbstractGenerator {
 	
-	public EList<State> _ListState ; 
-	public EList<Transition> _ListTransition ; 
+	public EList<State> _State ; 
+	public EList<Transition> _Transition ; 
 	 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		fsa.generateFile('StateMachineMain.java', resource.init)
-		fsa.generateFile('State.java', resource.interfaceState)  
-						 		
+		
 		var element = resource.contents.get(0) as StateMachine;
+		val nameMachine = element.name as String ;
+		_State = element.getState(); 
+		_Transition = element.getTransition();	
 		
-		_ListState = element.getState(); 
-		_ListState.forEach[ _state | fsa.generateFile(_state.name + '.java', resource.state(_state))];	
-		
-		_ListTransition = element.getTransition();			
-		_ListTransition.forEach[ _transition| fsa.generateFile(_transition.name + '.java', resource.transition(_transition))];
+		fsa.generateFile('Main/' + nameMachine + '.java', resource.init(nameMachine))
+		fsa.generateFile('Abstract/State.java', resource.generateAbstractClassState) 
+		fsa.generateFile('Abstract/Transition.java', resource.generateAbstractClassTransition) 
+						 				
+		 		
+		_State.forEach[ _state | fsa.generateFile(nameMachine + '/' + _state.name + '.java', resource.state(_state, nameMachine))];							
+		_Transition.forEach[ _transition| fsa.generateFile(nameMachine + '/' + _transition.name + '.java', resource.transition(_transition, nameMachine))];
 				
 		
 	}
 
-	def init(Resource r) '''
-		package StateMachine
+	def init(Resource r, String _nameMachine) '''
+		package Main
 		
-		public class StateMachineDemo {
+		public class «_nameMachine» {
 			
-		   public String state;
-		   
-		   public static void main(String[] args) {
-		   		state.printState();
+		   		public static void main(String[] args) {
+		   		
 		   }
 		}			
 	'''
-	def interfaceState(Resource r) '''
-		package StateMachine
+	def generateAbstractClassState(Resource r) '''
+		package Abstract
 		
-		public interface State {
-		   public void printState();
+		abstract class State {
+		   
+		   private String name; 
+		   private Boolean status
+		   
+		   public String getName(){
+		   		return this.name;
+		   }
+		   
+		   public void setName(String newName){
+		   		this.name = newName;
+		   }
+		   
+		   public Boolean getStatus(){
+		   		 return this.status;
+		   		}
+		   		   
+		   public void setStatus(Boolean newStatus){
+		   		 this.status = newStatus;
+		   }
+		      
 		}		
 	'''
 	
-	def state(Resource r, State state)'''
-		package StateMachine
+	def generateAbstractClassTransition(Resource r) '''
+		package Abstract
+				
+		abstract class Transistion {
+				   
+			private String name; 
+			private State origine; 
+			private State target ; 
+				   
+			public String getName(){
+				  return this.name;
+			}
+				   
+			public void setName(String newName){
+				   this.name = newName;
+			}
+			
+			public State getOrigine(){
+				return this.origine;
+			}
+				   		
+			public State getTarget(){
+				return this.target;
+			}
+			
+			public void setOrigine(State newOrigine){
+				this.origine = newOrigine;	
+			}
+			
+			public void setTarget(State newTarget){
+				this.target = newTarget;
+			}
+				      
+		}		
+	'''
+	
+	
+	def state(Resource r, State state, String nameMachine)'''
+		package «nameMachine»
 		
-		class «state.name» implements State {
+		class «state.name» extends State {
 		
-		   private String name = «state.name»;
 		   
-		   public void printState() {
-		   		System.out.println(" L'etat est : «state.name»");	
+		   public «state.name» (Boolean status){
+		   		
+		   		this.setName(«state.name»); 
+		   		this.setStatus(status);
+		   		
 		   }
+		   		   		   		   		   		  		   
+		   
 		}
 	'''
 	
-	def transition(Resource r, Transition transition)'''
-		package StateMachine
+	def transition(Resource r, Transition transition, String nameMachine)'''
+		package «nameMachine»
 		
-		class «transition.name» {
+		class «transition.name» extends Transition{
 		
-		   private String name = «transition.name»;
-		   
-		   public void setState(){
-		         this.state = «transition.target.name»;		
+		   public «transition.name» (){
+		   		this.setName(«transition.name»);
+		   		this.setOrigine(«transition.from»);
+		   		this.setTarget(«transition.target»);
 		   }
+			
+			public void transit(){
+				if(this.getTarget().getStatus == true){
+					System.out.println("Vous etes deja dans l'etat" + this.getTarget().getName());
+				}
+				else{
+					this.getTarget().setStatus(true);
+					this.getOrigine().setStatus(false);
+				}
+			}
 		}	
 	'''
 }

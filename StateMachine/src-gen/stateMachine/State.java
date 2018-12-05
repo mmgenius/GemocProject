@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link stateMachine.State#getName <em>Name</em>}</li>
  *   <li>{@link stateMachine.State#getTargetOut <em>Target Out</em>}</li>
  *   <li>{@link stateMachine.State#getFromIn <em>From In</em>}</li>
+ *   <li>{@link stateMachine.State#isStatus <em>Status</em>}</li>
  * </ul>
  *
  * @see stateMachine.StateMachinePackage#getState()
@@ -86,5 +87,31 @@ public interface State extends EObject {
 	 * @generated
 	 */
 	EList<Transition> getFromIn();
+
+	/**
+	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' attribute.
+	 * @see #setStatus(boolean)
+	 * @see stateMachine.StateMachinePackage#getState_Status()
+	 * @model
+	 * @generated
+	 */
+	boolean isStatus();
+
+	/**
+	 * Sets the value of the '{@link stateMachine.State#isStatus <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Status</em>' attribute.
+	 * @see #isStatus()
+	 * @generated
+	 */
+	void setStatus(boolean value);
 
 } // State

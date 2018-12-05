@@ -18,6 +18,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute stateMachine.ecore#//State/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference stateMachine.ecore#//State/targetOut"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference stateMachine.ecore#//State/fromIn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute stateMachine.ecore#//State/status"/>
     </genClasses>
     <genClasses ecoreClass="stateMachine.ecore#//Transition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute stateMachine.ecore#//Transition/name"/>

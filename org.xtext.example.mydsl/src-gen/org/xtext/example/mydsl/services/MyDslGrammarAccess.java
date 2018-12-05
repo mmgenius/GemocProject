@@ -91,6 +91,25 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
 	}
+	public class EBooleanElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.EBoolean");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EBoolean:
+		//	INT | ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//INT | ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
+	}
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.State");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -179,6 +198,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final StateMachineElements pStateMachine;
 	private final EStringElements pEString;
+	private final EBooleanElements pEBoolean;
 	private final StateElements pState;
 	private final TransitionElements pTransition;
 	
@@ -193,6 +213,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pStateMachine = new StateMachineElements();
 		this.pEString = new EStringElements();
+		this.pEBoolean = new EBooleanElements();
 		this.pState = new StateElements();
 		this.pTransition = new TransitionElements();
 	}
@@ -243,6 +264,16 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getEStringRule() {
 		return getEStringAccess().getRule();
+	}
+	
+	//EBoolean:
+	//	INT | ID;
+	public EBooleanElements getEBooleanAccess() {
+		return pEBoolean;
+	}
+	
+	public ParserRule getEBooleanRule() {
+		return getEBooleanAccess().getRule();
 	}
 	
 	//State:
