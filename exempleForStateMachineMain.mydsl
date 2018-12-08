@@ -1,0 +1,6 @@
+StateMachine machine
+
+State Open
+State Close
+Transition On Close -> Open
+Transition Off Open-> Close
