@@ -33,10 +33,8 @@ class MyDslGenerator extends AbstractGenerator {
 		fsa.generateFile('abstractMachine/State.java', resource.generateAbstractClassState) 
 		fsa.generateFile('abstractMachine/Transition.java', resource.generateAbstractClassTransition)
 		
-						 				
-		 		
-		_State.forEach[ _state | fsa.generateFile(nameMachine + '/' + _state.name + '.java', resource.state(_state, nameMachine))];							
-		_Transition.forEach[ _transition| fsa.generateFile(nameMachine + '/' + _transition.name + '.java', resource.transition(_transition, nameMachine))];
+		_State.forEach[ _state | fsa.generateFile(nameMachine + '/' + _state.name + '.java', _state.print(nameMachine))];							
+		_Transition.forEach[ _transition| fsa.generateFile(nameMachine + '/' + _transition.name + '.java', _transition.print(nameMachine))];
 				
 		
 	}
@@ -50,7 +48,7 @@ class MyDslGenerator extends AbstractGenerator {
 		import abstractMachine.*;
 		import «_nameMachine».*;
 		
-		public class MainStateMachine {
+		public class «_nameMachine» {
 		
 			private static Scanner scan;
 		
@@ -71,11 +69,11 @@ class MyDslGenerator extends AbstractGenerator {
 			        switch (choice) {
 			        
 				        case "on":
-				        	on.transit();
+				        	on.changeState();
 				        	break;
 				        
 				        case "off":
-				        	off.transit();
+				        	off.changeState();
 				        	break;
 				        
 				        case "quit":
@@ -153,7 +151,7 @@ class MyDslGenerator extends AbstractGenerator {
 				this.target = newTarget;
 			}
 			
-			public void transit(){
+			public void changeState(){
 				if(this.getTarget().getStatus() == true){
 					System.out.println("Vous etes deja dans l'etat " + this.getTarget().getName());
 				}
@@ -168,7 +166,7 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	
-	def state(Resource r, State state, String nameMachine)'''
+	def print(State state, String nameMachine)'''
 		package «nameMachine»;
 		
 		import abstractMachine.*;
@@ -183,18 +181,21 @@ class MyDslGenerator extends AbstractGenerator {
 		}
 	'''
 	
-	def transition(Resource r, Transition transition, String nameMachine)'''
+	def print(Transition transition, String nameMachine)'''
 		package «nameMachine»;
 		
 		import abstractMachine.*;
 		
 		public class «transition.name» extends Transition{
-		
-		   public «transition.name» (){
-		   		this.setName("«transition.name»");
-		   		this.setOrigine(«transition.from»);
-		   		this.setTarget(«transition.target»);
-		   }
+			
+			State from;
+			State target;
+		   
+   		   public «transition.name» (State from, State target){
+   		   		this.setName("«transition.name»");
+   		   		this.setOrigine(from);
+   		   		this.setTarget(target);
+   		   }
 
 		}	
 	'''
