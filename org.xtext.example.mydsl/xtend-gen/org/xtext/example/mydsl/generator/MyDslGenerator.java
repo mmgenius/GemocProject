@@ -37,6 +37,7 @@ public class MyDslGenerator extends AbstractGenerator {
     fsa.generateFile((("main/" + nameMachine) + ".java"), this.init(resource, nameMachine));
     fsa.generateFile("abstract/State.java", this.generateAbstractClassState(resource));
     fsa.generateFile("abstract/Transition.java", this.generateAbstractClassTransition(resource));
+    fsa.generateFile("./", this.defineJavaProject(resource));
     final Consumer<State> _function = (State _state) -> {
       String _name_1 = _state.getName();
       String _plus = ((nameMachine + "/") + _name_1);
@@ -51,6 +52,13 @@ public class MyDslGenerator extends AbstractGenerator {
       fsa.generateFile(_plus_1, this.transition(resource, _transition, nameMachine));
     };
     this._Transition.forEach(_function_1);
+  }
+  
+  public CharSequence defineJavaProject(final Resource _Resources) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.newLine();
+    return _builder;
   }
   
   public CharSequence init(final Resource r, final String _nameMachine) {
