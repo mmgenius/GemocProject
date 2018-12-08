@@ -314,10 +314,10 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_TargetOut(), this.getTransition(), this.getTransition_From(), "targetOut", null, 1, -1,
+		initEReference(getState_TargetOut(), this.getTransition(), this.getTransition_From(), "targetOut", null, 0, 1,
 				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_FromIn(), this.getTransition(), this.getTransition_Target(), "fromIn", null, 1, -1,
+		initEReference(getState_FromIn(), this.getTransition(), this.getTransition_Target(), "fromIn", null, 0, 1,
 				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Status(), ecorePackage.getEBoolean(), "status", null, 0, 1, State.class, !IS_TRANSIENT,

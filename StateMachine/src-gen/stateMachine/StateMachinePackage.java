@@ -131,7 +131,7 @@ public interface StateMachinePackage extends EPackage {
 	int STATE__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Target Out</b></em>' reference list.
+	 * The feature id for the '<em><b>Target Out</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -140,7 +140,7 @@ public interface StateMachinePackage extends EPackage {
 	int STATE__TARGET_OUT = 1;
 
 	/**
-	 * The feature id for the '<em><b>From In</b></em>' reference list.
+	 * The feature id for the '<em><b>From In</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -295,10 +295,10 @@ public interface StateMachinePackage extends EPackage {
 	EAttribute getState_Name();
 
 	/**
-	 * Returns the meta object for the reference list '{@link stateMachine.State#getTargetOut <em>Target Out</em>}'.
+	 * Returns the meta object for the reference '{@link stateMachine.State#getTargetOut <em>Target Out</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Target Out</em>'.
+	 * @return the meta object for the reference '<em>Target Out</em>'.
 	 * @see stateMachine.State#getTargetOut()
 	 * @see #getState()
 	 * @generated
@@ -306,10 +306,10 @@ public interface StateMachinePackage extends EPackage {
 	EReference getState_TargetOut();
 
 	/**
-	 * Returns the meta object for the reference list '{@link stateMachine.State#getFromIn <em>From In</em>}'.
+	 * Returns the meta object for the reference '{@link stateMachine.State#getFromIn <em>From In</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>From In</em>'.
+	 * @return the meta object for the reference '<em>From In</em>'.
 	 * @see stateMachine.State#getFromIn()
 	 * @see #getState()
 	 * @generated
@@ -446,7 +446,7 @@ public interface StateMachinePackage extends EPackage {
 		EAttribute STATE__NAME = eINSTANCE.getState_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Target Out</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Target Out</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -454,7 +454,7 @@ public interface StateMachinePackage extends EPackage {
 		EReference STATE__TARGET_OUT = eINSTANCE.getState_TargetOut();
 
 		/**
-		 * The meta object literal for the '<em><b>From In</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>From In</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

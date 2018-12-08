@@ -2,22 +2,13 @@
  */
 package stateMachine.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import stateMachine.State;
 import stateMachine.StateMachinePackage;
 import stateMachine.Transition;
@@ -60,24 +51,24 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTargetOut() <em>Target Out</em>}' reference list.
+	 * The cached value of the '{@link #getTargetOut() <em>Target Out</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTargetOut()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Transition> targetOut;
+	protected Transition targetOut;
 
 	/**
-	 * The cached value of the '{@link #getFromIn() <em>From In</em>}' reference list.
+	 * The cached value of the '{@link #getFromIn() <em>From In</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFromIn()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Transition> fromIn;
+	protected Transition fromIn;
 
 	/**
 	 * The default value of the '{@link #isStatus() <em>Status</em>}' attribute.
@@ -144,10 +135,15 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Transition> getTargetOut() {
-		if (targetOut == null) {
-			targetOut = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this,
-					StateMachinePackage.STATE__TARGET_OUT, StateMachinePackage.TRANSITION__FROM);
+	public Transition getTargetOut() {
+		if (targetOut != null && targetOut.eIsProxy()) {
+			InternalEObject oldTargetOut = (InternalEObject) targetOut;
+			targetOut = (Transition) eResolveProxy(oldTargetOut);
+			if (targetOut != oldTargetOut) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StateMachinePackage.STATE__TARGET_OUT,
+							oldTargetOut, targetOut));
+			}
 		}
 		return targetOut;
 	}
@@ -157,12 +153,117 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Transition> getFromIn() {
-		if (fromIn == null) {
-			fromIn = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this,
-					StateMachinePackage.STATE__FROM_IN, StateMachinePackage.TRANSITION__TARGET);
+	public Transition basicGetTargetOut() {
+		return targetOut;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTargetOut(Transition newTargetOut, NotificationChain msgs) {
+		Transition oldTargetOut = targetOut;
+		targetOut = newTargetOut;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					StateMachinePackage.STATE__TARGET_OUT, oldTargetOut, newTargetOut);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetOut(Transition newTargetOut) {
+		if (newTargetOut != targetOut) {
+			NotificationChain msgs = null;
+			if (targetOut != null)
+				msgs = ((InternalEObject) targetOut).eInverseRemove(this, StateMachinePackage.TRANSITION__FROM,
+						Transition.class, msgs);
+			if (newTargetOut != null)
+				msgs = ((InternalEObject) newTargetOut).eInverseAdd(this, StateMachinePackage.TRANSITION__FROM,
+						Transition.class, msgs);
+			msgs = basicSetTargetOut(newTargetOut, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StateMachinePackage.STATE__TARGET_OUT, newTargetOut,
+					newTargetOut));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Transition getFromIn() {
+		if (fromIn != null && fromIn.eIsProxy()) {
+			InternalEObject oldFromIn = (InternalEObject) fromIn;
+			fromIn = (Transition) eResolveProxy(oldFromIn);
+			if (fromIn != oldFromIn) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StateMachinePackage.STATE__FROM_IN,
+							oldFromIn, fromIn));
+			}
 		}
 		return fromIn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Transition basicGetFromIn() {
+		return fromIn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetFromIn(Transition newFromIn, NotificationChain msgs) {
+		Transition oldFromIn = fromIn;
+		fromIn = newFromIn;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					StateMachinePackage.STATE__FROM_IN, oldFromIn, newFromIn);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFromIn(Transition newFromIn) {
+		if (newFromIn != fromIn) {
+			NotificationChain msgs = null;
+			if (fromIn != null)
+				msgs = ((InternalEObject) fromIn).eInverseRemove(this, StateMachinePackage.TRANSITION__TARGET,
+						Transition.class, msgs);
+			if (newFromIn != null)
+				msgs = ((InternalEObject) newFromIn).eInverseAdd(this, StateMachinePackage.TRANSITION__TARGET,
+						Transition.class, msgs);
+			msgs = basicSetFromIn(newFromIn, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StateMachinePackage.STATE__FROM_IN, newFromIn,
+					newFromIn));
 	}
 
 	/**
@@ -197,9 +298,15 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case StateMachinePackage.STATE__TARGET_OUT:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getTargetOut()).basicAdd(otherEnd, msgs);
+			if (targetOut != null)
+				msgs = ((InternalEObject) targetOut).eInverseRemove(this, StateMachinePackage.TRANSITION__FROM,
+						Transition.class, msgs);
+			return basicSetTargetOut((Transition) otherEnd, msgs);
 		case StateMachinePackage.STATE__FROM_IN:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getFromIn()).basicAdd(otherEnd, msgs);
+			if (fromIn != null)
+				msgs = ((InternalEObject) fromIn).eInverseRemove(this, StateMachinePackage.TRANSITION__TARGET,
+						Transition.class, msgs);
+			return basicSetFromIn((Transition) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -213,9 +320,9 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case StateMachinePackage.STATE__TARGET_OUT:
-			return ((InternalEList<?>) getTargetOut()).basicRemove(otherEnd, msgs);
+			return basicSetTargetOut(null, msgs);
 		case StateMachinePackage.STATE__FROM_IN:
-			return ((InternalEList<?>) getFromIn()).basicRemove(otherEnd, msgs);
+			return basicSetFromIn(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -231,9 +338,13 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 		case StateMachinePackage.STATE__NAME:
 			return getName();
 		case StateMachinePackage.STATE__TARGET_OUT:
-			return getTargetOut();
+			if (resolve)
+				return getTargetOut();
+			return basicGetTargetOut();
 		case StateMachinePackage.STATE__FROM_IN:
-			return getFromIn();
+			if (resolve)
+				return getFromIn();
+			return basicGetFromIn();
 		case StateMachinePackage.STATE__STATUS:
 			return isStatus();
 		}
@@ -253,12 +364,10 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 			setName((String) newValue);
 			return;
 		case StateMachinePackage.STATE__TARGET_OUT:
-			getTargetOut().clear();
-			getTargetOut().addAll((Collection<? extends Transition>) newValue);
+			setTargetOut((Transition) newValue);
 			return;
 		case StateMachinePackage.STATE__FROM_IN:
-			getFromIn().clear();
-			getFromIn().addAll((Collection<? extends Transition>) newValue);
+			setFromIn((Transition) newValue);
 			return;
 		case StateMachinePackage.STATE__STATUS:
 			setStatus((Boolean) newValue);
@@ -279,10 +388,10 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 			setName(NAME_EDEFAULT);
 			return;
 		case StateMachinePackage.STATE__TARGET_OUT:
-			getTargetOut().clear();
+			setTargetOut((Transition) null);
 			return;
 		case StateMachinePackage.STATE__FROM_IN:
-			getFromIn().clear();
+			setFromIn((Transition) null);
 			return;
 		case StateMachinePackage.STATE__STATUS:
 			setStatus(STATUS_EDEFAULT);
@@ -302,9 +411,9 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 		case StateMachinePackage.STATE__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case StateMachinePackage.STATE__TARGET_OUT:
-			return targetOut != null && !targetOut.isEmpty();
+			return targetOut != null;
 		case StateMachinePackage.STATE__FROM_IN:
-			return fromIn != null && !fromIn.isEmpty();
+			return fromIn != null;
 		case StateMachinePackage.STATE__STATUS:
 			return status != STATUS_EDEFAULT;
 		}

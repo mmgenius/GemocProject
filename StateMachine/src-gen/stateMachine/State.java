@@ -2,8 +2,6 @@
  */
 package stateMachine;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -53,8 +51,7 @@ public interface State extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Target Out</b></em>' reference list.
-	 * The list contents are of type {@link stateMachine.Transition}.
+	 * Returns the value of the '<em><b>Target Out</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link stateMachine.Transition#getFrom <em>From</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -62,17 +59,27 @@ public interface State extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Out</em>' reference list.
+	 * @return the value of the '<em>Target Out</em>' reference.
+	 * @see #setTargetOut(Transition)
 	 * @see stateMachine.StateMachinePackage#getState_TargetOut()
 	 * @see stateMachine.Transition#getFrom
-	 * @model opposite="from" required="true"
+	 * @model opposite="from"
 	 * @generated
 	 */
-	EList<Transition> getTargetOut();
+	Transition getTargetOut();
 
 	/**
-	 * Returns the value of the '<em><b>From In</b></em>' reference list.
-	 * The list contents are of type {@link stateMachine.Transition}.
+	 * Sets the value of the '{@link stateMachine.State#getTargetOut <em>Target Out</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Out</em>' reference.
+	 * @see #getTargetOut()
+	 * @generated
+	 */
+	void setTargetOut(Transition value);
+
+	/**
+	 * Returns the value of the '<em><b>From In</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link stateMachine.Transition#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -80,13 +87,24 @@ public interface State extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>From In</em>' reference list.
+	 * @return the value of the '<em>From In</em>' reference.
+	 * @see #setFromIn(Transition)
 	 * @see stateMachine.StateMachinePackage#getState_FromIn()
 	 * @see stateMachine.Transition#getTarget
-	 * @model opposite="target" required="true"
+	 * @model opposite="target"
 	 * @generated
 	 */
-	EList<Transition> getFromIn();
+	Transition getFromIn();
+
+	/**
+	 * Sets the value of the '{@link stateMachine.State#getFromIn <em>From In</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>From In</em>' reference.
+	 * @see #getFromIn()
+	 * @generated
+	 */
+	void setFromIn(Transition value);
 
 	/**
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
