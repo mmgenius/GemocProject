@@ -29,9 +29,9 @@ class MyDslGenerator extends AbstractGenerator {
 		_State = element.getState(); 
 		_Transition = element.getTransition();	
 		
-		fsa.generateFile('Main/' + nameMachine + '.java', resource.init(nameMachine))
-		fsa.generateFile('Abstract/State.java', resource.generateAbstractClassState) 
-		fsa.generateFile('Abstract/Transition.java', resource.generateAbstractClassTransition) 
+		fsa.generateFile('main/' + nameMachine + '.java', resource.init(nameMachine))
+		fsa.generateFile('abstract/State.java', resource.generateAbstractClassState) 
+		fsa.generateFile('abstract/Transition.java', resource.generateAbstractClassTransition) 
 						 				
 		 		
 		_State.forEach[ _state | fsa.generateFile(nameMachine + '/' + _state.name + '.java', resource.state(_state, nameMachine))];							
@@ -41,22 +41,63 @@ class MyDslGenerator extends AbstractGenerator {
 	}
 
 	def init(Resource r, String _nameMachine) '''
-		package Main
+		package main;
 		
-		public class «_nameMachine» {
-			
-		   		public static void main(String[] args) {
-		   		
-		   }
+		import java.util.Scanner;
+		import abstact.State;
+		import abstact.Transition;
+		import «_nameMachine».*;
+		
+		public class MainStateMachine {
+		
+			private static Scanner scan;
+		
+			public static void main(String[] args) {
+				
+				State open = new Open(true);
+				State close = new Close(false);
+				Transition on = new On(close, open);
+				Transition off = new Off(open, close);
+				
+				Boolean init = true;
+				
+				while(init){
+					System.out.print("Entrer la transition (on ou off) ou quitter (quit) : ");
+					scan = new Scanner(System.in);
+			        String choice = scan.next();
+			        
+			        switch (choice) {
+			        
+				        case "on":
+				        	on.transit();
+				        	break;
+				        
+				        case "off":
+				        	off.transit();
+				        	break;
+				        
+				        case "quit":
+				        	System.out.println("Au revoir !");
+				        	init = false;
+				        	break;
+				        
+				        default:
+				        	System.out.println("La transition saisie est incorrecte.");	
+			        }
+				}
+				
+				System.exit(0);
+				
+			}
 		}			
 	'''
 	def generateAbstractClassState(Resource r) '''
-		package Abstract
+		package abstract;
 		
-		abstract class State {
+		public abstract class State {
 		   
 		   private String name; 
-		   private Boolean status
+		   private Boolean status;
 		   
 		   public String getName(){
 		   		return this.name;
@@ -78,9 +119,9 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def generateAbstractClassTransition(Resource r) '''
-		package Abstract
+		package abstract;
 				
-		abstract class Transistion {
+		public abstract class Transition {
 				   
 			private String name; 
 			private State origine; 
@@ -109,48 +150,49 @@ class MyDslGenerator extends AbstractGenerator {
 			public void setTarget(State newTarget){
 				this.target = newTarget;
 			}
+			
+			public void transit(){
+				if(this.getTarget().getStatus() == true){
+					System.out.println("Vous etes deja dans l'etat " + this.getTarget().getName());
+				}
+				else{
+					this.getTarget().setStatus(true);
+					this.getOrigine().setStatus(false);
+					System.out.println("Vous etes maintenant dans l'etat " + this.getTarget().getName());
+				}
+			}
 				      
 		}		
 	'''
 	
 	
 	def state(Resource r, State state, String nameMachine)'''
-		package «nameMachine»
+		package «nameMachine»;
 		
-		class «state.name» extends State {
-		
+		public class «state.name» extends State {	
 		   
-		   public «state.name» (Boolean status){
-		   		
+		   public «state.name» (Boolean status){		   		
 		   		this.setName(«state.name»); 
-		   		this.setStatus(status);
-		   		
+		   		this.setStatus(status);		   		
 		   }
-		   		   		   		   		   		  		   
 		   
 		}
 	'''
 	
 	def transition(Resource r, Transition transition, String nameMachine)'''
-		package «nameMachine»
+		package «nameMachine»;
 		
-		class «transition.name» extends Transition{
+		import abstact.State;
+		import abstact.Transition;
+		
+		public class «transition.name» extends Transition{
 		
 		   public «transition.name» (){
 		   		this.setName(«transition.name»);
 		   		this.setOrigine(«transition.from»);
 		   		this.setTarget(«transition.target»);
 		   }
-			
-			public void transit(){
-				if(this.getTarget().getStatus == true){
-					System.out.println("Vous etes deja dans l'etat" + this.getTarget().getName());
-				}
-				else{
-					this.getTarget().setStatus(true);
-					this.getOrigine().setStatus(false);
-				}
-			}
+
 		}	
 	'''
 }
