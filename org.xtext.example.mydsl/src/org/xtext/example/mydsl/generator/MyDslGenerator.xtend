@@ -30,8 +30,8 @@ class MyDslGenerator extends AbstractGenerator {
 		_Transition = element.getTransition();	
 		
 		fsa.generateFile('main/' + nameMachine + '.java', resource.init(nameMachine))
-		fsa.generateFile('abstract/State.java', resource.generateAbstractClassState) 
-		fsa.generateFile('abstract/Transition.java', resource.generateAbstractClassTransition)
+		fsa.generateFile('abstractMachine/State.java', resource.generateAbstractClassState) 
+		fsa.generateFile('abstractMachine/Transition.java', resource.generateAbstractClassTransition)
 		
 						 				
 		 		
@@ -47,8 +47,7 @@ class MyDslGenerator extends AbstractGenerator {
 		package main;
 		
 		import java.util.Scanner;
-		import abstact.State;
-		import abstact.Transition;
+		import abstractMachine.*;
 		import «_nameMachine».*;
 		
 		public class MainStateMachine {
@@ -95,7 +94,7 @@ class MyDslGenerator extends AbstractGenerator {
 		}			
 	'''
 	def generateAbstractClassState(Resource r) '''
-		package abstract;
+		package abstractMachine;
 		
 		public abstract class State {
 		   
@@ -122,7 +121,7 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def generateAbstractClassTransition(Resource r) '''
-		package abstract;
+		package abstractMachine;
 				
 		public abstract class Transition {
 				   
@@ -172,10 +171,12 @@ class MyDslGenerator extends AbstractGenerator {
 	def state(Resource r, State state, String nameMachine)'''
 		package «nameMachine»;
 		
+		import abstractMachine.*;
+		
 		public class «state.name» extends State {	
 		   
 		   public «state.name» (Boolean status){		   		
-		   		this.setName(«state.name»); 
+		   		this.setName("«state.name»"); 
 		   		this.setStatus(status);		   		
 		   }
 		   
@@ -185,13 +186,12 @@ class MyDslGenerator extends AbstractGenerator {
 	def transition(Resource r, Transition transition, String nameMachine)'''
 		package «nameMachine»;
 		
-		import abstact.State;
-		import abstact.Transition;
+		import abstractMachine.*;
 		
 		public class «transition.name» extends Transition{
 		
 		   public «transition.name» (){
-		   		this.setName(«transition.name»);
+		   		this.setName("«transition.name»");
 		   		this.setOrigine(«transition.from»);
 		   		this.setTarget(«transition.target»);
 		   }
