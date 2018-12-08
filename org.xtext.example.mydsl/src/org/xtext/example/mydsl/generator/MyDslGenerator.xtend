@@ -32,7 +32,7 @@ class MyDslGenerator extends AbstractGenerator {
 		fsa.generateFile('main/' + nameMachine + '.java', resource.init(nameMachine))
 		fsa.generateFile('abstract/State.java', resource.generateAbstractClassState) 
 		fsa.generateFile('abstract/Transition.java', resource.generateAbstractClassTransition)
-		fsa.generateFile('./', resource.defineJavaProject) 
+		
 						 				
 		 		
 		_State.forEach[ _state | fsa.generateFile(nameMachine + '/' + _state.name + '.java', resource.state(_state, nameMachine))];							
@@ -41,9 +41,7 @@ class MyDslGenerator extends AbstractGenerator {
 		
 	}
 	
-	def defineJavaProject(Resource _Resources)'''
 	
-	'''
 
 	def init(Resource r, String _nameMachine) '''
 		package main;
