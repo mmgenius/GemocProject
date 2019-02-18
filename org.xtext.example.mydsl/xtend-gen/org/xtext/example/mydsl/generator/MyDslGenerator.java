@@ -35,20 +35,20 @@ public class MyDslGenerator extends AbstractGenerator {
     this._State = element.getState();
     this._Transition = element.getTransition();
     fsa.generateFile((("main/" + nameMachine) + ".java"), this.init(resource, nameMachine));
-    fsa.generateFile("abstract/State.java", this.generateAbstractClassState(resource));
-    fsa.generateFile("abstract/Transition.java", this.generateAbstractClassTransition(resource));
+    fsa.generateFile("abstractMachine/State.java", this.generateAbstractClassState(resource));
+    fsa.generateFile("abstractMachine/Transition.java", this.generateAbstractClassTransition(resource));
     final Consumer<State> _function = (State _state) -> {
       String _name_1 = _state.getName();
       String _plus = ((nameMachine + "/") + _name_1);
       String _plus_1 = (_plus + ".java");
-      fsa.generateFile(_plus_1, this.state(resource, _state, nameMachine));
+      fsa.generateFile(_plus_1, this.print(_state, nameMachine));
     };
     this._State.forEach(_function);
     final Consumer<Transition> _function_1 = (Transition _transition) -> {
       String _name_1 = _transition.getName();
       String _plus = ((nameMachine + "/") + _name_1);
       String _plus_1 = (_plus + ".java");
-      fsa.generateFile(_plus_1, this.transition(resource, _transition, nameMachine));
+      fsa.generateFile(_plus_1, this.print(_transition, nameMachine));
     };
     this._Transition.forEach(_function_1);
   }
@@ -60,17 +60,17 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("import java.util.Scanner;");
     _builder.newLine();
-    _builder.append("import abstact.State;");
-    _builder.newLine();
-    _builder.append("import abstact.Transition;");
+    _builder.append("import abstractMachine.*;");
     _builder.newLine();
     _builder.append("import ");
     _builder.append(_nameMachine);
     _builder.append(".*;");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("public class MainStateMachine {");
-    _builder.newLine();
+    _builder.append("public class ");
+    _builder.append(_nameMachine);
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private static Scanner scan;");
@@ -123,7 +123,7 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("case \"on\":");
     _builder.newLine();
     _builder.append("\t\t        \t");
-    _builder.append("on.transit();");
+    _builder.append("on.changeState();");
     _builder.newLine();
     _builder.append("\t\t        \t");
     _builder.append("break;");
@@ -134,7 +134,7 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("case \"off\":");
     _builder.newLine();
     _builder.append("\t\t        \t");
-    _builder.append("off.transit();");
+    _builder.append("off.changeState();");
     _builder.newLine();
     _builder.append("\t\t        \t");
     _builder.append("break;");
@@ -184,7 +184,7 @@ public class MyDslGenerator extends AbstractGenerator {
   
   public CharSequence generateAbstractClassState(final Resource r) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package abstract;");
+    _builder.append("package abstractMachine;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("public abstract class State {");
@@ -250,7 +250,7 @@ public class MyDslGenerator extends AbstractGenerator {
   
   public CharSequence generateAbstractClassTransition(final Resource r) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package abstract;");
+    _builder.append("package abstractMachine;");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.newLine();
@@ -336,7 +336,7 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public void transit(){");
+    _builder.append("public void changeState(){");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("if(this.getTarget().getStatus() == true){");
@@ -372,12 +372,15 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence state(final Resource r, final State state, final String nameMachine) {
+  public CharSequence print(final State state, final String nameMachine) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(nameMachine);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import abstractMachine.*;");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
     String _name = state.getName();
@@ -393,10 +396,10 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append(" (Boolean status){\t\t   \t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("   \t\t");
-    _builder.append("this.setName(");
+    _builder.append("this.setName(\"");
     String _name_2 = state.getName();
     _builder.append(_name_2, "   \t\t");
-    _builder.append("); ");
+    _builder.append("\"); ");
     _builder.newLineIfNotEmpty();
     _builder.append("   \t\t");
     _builder.append("this.setStatus(status);\t\t   \t\t");
@@ -411,16 +414,14 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence transition(final Resource r, final Transition transition, final String nameMachine) {
+  public CharSequence print(final Transition transition, final String nameMachine) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(nameMachine);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import abstact.State;");
-    _builder.newLine();
-    _builder.append("import abstact.Transition;");
+    _builder.append("import abstractMachine.*;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
@@ -428,32 +429,35 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append(_name);
     _builder.append(" extends Transition{");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("State from;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("State target;");
     _builder.newLine();
     _builder.append("   ");
+    _builder.newLine();
+    _builder.append("   \t\t   ");
     _builder.append("public ");
     String _name_1 = transition.getName();
-    _builder.append(_name_1, "   ");
-    _builder.append(" (){");
+    _builder.append(_name_1, "   \t\t   ");
+    _builder.append(" (State from, State target){");
     _builder.newLineIfNotEmpty();
-    _builder.append("   \t\t");
-    _builder.append("this.setName(");
+    _builder.append("   \t\t   \t\t");
+    _builder.append("this.setName(\"");
     String _name_2 = transition.getName();
-    _builder.append(_name_2, "   \t\t");
-    _builder.append(");");
+    _builder.append(_name_2, "   \t\t   \t\t");
+    _builder.append("\");");
     _builder.newLineIfNotEmpty();
-    _builder.append("   \t\t");
-    _builder.append("this.setOrigine(");
-    State _from = transition.getFrom();
-    _builder.append(_from, "   \t\t");
-    _builder.append(");");
-    _builder.newLineIfNotEmpty();
-    _builder.append("   \t\t");
-    _builder.append("this.setTarget(");
-    State _target = transition.getTarget();
-    _builder.append(_target, "   \t\t");
-    _builder.append(");");
-    _builder.newLineIfNotEmpty();
-    _builder.append("   ");
+    _builder.append("   \t\t   \t\t");
+    _builder.append("this.setOrigine(from);");
+    _builder.newLine();
+    _builder.append("   \t\t   \t\t");
+    _builder.append("this.setTarget(target);");
+    _builder.newLine();
+    _builder.append("   \t\t   ");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
