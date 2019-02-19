@@ -7,6 +7,7 @@
         eType="#//State" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
         eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" eType="#//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -18,9 +19,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//State"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//State"
         eOpposite="#//State/Outgoing"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//State" eOpposite="#//State/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//State"
+        eOpposite="#//State/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trigger" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
