@@ -26,6 +26,8 @@ import stateMachine.Transition;
  *   <li>{@link stateMachine.impl.TransitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link stateMachine.impl.TransitionImpl#getFrom <em>From</em>}</li>
  *   <li>{@link stateMachine.impl.TransitionImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link stateMachine.impl.TransitionImpl#getAction <em>Action</em>}</li>
+ *   <li>{@link stateMachine.impl.TransitionImpl#getTrigger <em>Trigger</em>}</li>
  * </ul>
  *
  * @generated
@@ -70,6 +72,46 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * @ordered
 	 */
 	protected State target;
+
+	/**
+	 * The default value of the '{@link #getAction() <em>Action</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAction()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ACTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAction() <em>Action</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAction()
+	 * @generated
+	 * @ordered
+	 */
+	protected String action = ACTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTrigger() <em>Trigger</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTrigger()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TRIGGER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTrigger() <em>Trigger</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTrigger()
+	 * @generated
+	 * @ordered
+	 */
+	protected String trigger = TRIGGER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -166,10 +208,10 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 		if (newFrom != from) {
 			NotificationChain msgs = null;
 			if (from != null)
-				msgs = ((InternalEObject) from).eInverseRemove(this, StateMachinePackage.STATE__TARGET_OUT, State.class,
+				msgs = ((InternalEObject) from).eInverseRemove(this, StateMachinePackage.STATE__OUTGOING, State.class,
 						msgs);
 			if (newFrom != null)
-				msgs = ((InternalEObject) newFrom).eInverseAdd(this, StateMachinePackage.STATE__TARGET_OUT, State.class,
+				msgs = ((InternalEObject) newFrom).eInverseAdd(this, StateMachinePackage.STATE__OUTGOING, State.class,
 						msgs);
 			msgs = basicSetFrom(newFrom, msgs);
 			if (msgs != null)
@@ -234,10 +276,10 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
-				msgs = ((InternalEObject) target).eInverseRemove(this, StateMachinePackage.STATE__FROM_IN, State.class,
+				msgs = ((InternalEObject) target).eInverseRemove(this, StateMachinePackage.STATE__INCOMING, State.class,
 						msgs);
 			if (newTarget != null)
-				msgs = ((InternalEObject) newTarget).eInverseAdd(this, StateMachinePackage.STATE__FROM_IN, State.class,
+				msgs = ((InternalEObject) newTarget).eInverseAdd(this, StateMachinePackage.STATE__INCOMING, State.class,
 						msgs);
 			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null)
@@ -252,17 +294,61 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAction() {
+		return action;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAction(String newAction) {
+		String oldAction = action;
+		action = newAction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StateMachinePackage.TRANSITION__ACTION, oldAction,
+					action));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getTrigger() {
+		return trigger;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTrigger(String newTrigger) {
+		String oldTrigger = trigger;
+		trigger = newTrigger;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StateMachinePackage.TRANSITION__TRIGGER, oldTrigger,
+					trigger));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case StateMachinePackage.TRANSITION__FROM:
 			if (from != null)
-				msgs = ((InternalEObject) from).eInverseRemove(this, StateMachinePackage.STATE__TARGET_OUT, State.class,
+				msgs = ((InternalEObject) from).eInverseRemove(this, StateMachinePackage.STATE__OUTGOING, State.class,
 						msgs);
 			return basicSetFrom((State) otherEnd, msgs);
 		case StateMachinePackage.TRANSITION__TARGET:
 			if (target != null)
-				msgs = ((InternalEObject) target).eInverseRemove(this, StateMachinePackage.STATE__FROM_IN, State.class,
+				msgs = ((InternalEObject) target).eInverseRemove(this, StateMachinePackage.STATE__INCOMING, State.class,
 						msgs);
 			return basicSetTarget((State) otherEnd, msgs);
 		}
@@ -303,6 +389,10 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 			if (resolve)
 				return getTarget();
 			return basicGetTarget();
+		case StateMachinePackage.TRANSITION__ACTION:
+			return getAction();
+		case StateMachinePackage.TRANSITION__TRIGGER:
+			return getTrigger();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -323,6 +413,12 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 			return;
 		case StateMachinePackage.TRANSITION__TARGET:
 			setTarget((State) newValue);
+			return;
+		case StateMachinePackage.TRANSITION__ACTION:
+			setAction((String) newValue);
+			return;
+		case StateMachinePackage.TRANSITION__TRIGGER:
+			setTrigger((String) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -345,6 +441,12 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 		case StateMachinePackage.TRANSITION__TARGET:
 			setTarget((State) null);
 			return;
+		case StateMachinePackage.TRANSITION__ACTION:
+			setAction(ACTION_EDEFAULT);
+			return;
+		case StateMachinePackage.TRANSITION__TRIGGER:
+			setTrigger(TRIGGER_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -363,6 +465,10 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 			return from != null;
 		case StateMachinePackage.TRANSITION__TARGET:
 			return target != null;
+		case StateMachinePackage.TRANSITION__ACTION:
+			return ACTION_EDEFAULT == null ? action != null : !ACTION_EDEFAULT.equals(action);
+		case StateMachinePackage.TRANSITION__TRIGGER:
+			return TRIGGER_EDEFAULT == null ? trigger != null : !TRIGGER_EDEFAULT.equals(trigger);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -380,6 +486,10 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", action: ");
+		result.append(action);
+		result.append(", trigger: ");
+		result.append(trigger);
 		result.append(')');
 		return result.toString();
 	}

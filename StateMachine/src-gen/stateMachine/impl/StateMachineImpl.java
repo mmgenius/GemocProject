@@ -34,6 +34,7 @@ import stateMachine.Transition;
  *   <li>{@link stateMachine.impl.StateMachineImpl#getName <em>Name</em>}</li>
  *   <li>{@link stateMachine.impl.StateMachineImpl#getState <em>State</em>}</li>
  *   <li>{@link stateMachine.impl.StateMachineImpl#getTransition <em>Transition</em>}</li>
+ *   <li>{@link stateMachine.impl.StateMachineImpl#getInitialState <em>Initial State</em>}</li>
  * </ul>
  *
  * @generated
@@ -78,6 +79,16 @@ public class StateMachineImpl extends MinimalEObjectImpl.Container implements St
 	 * @ordered
 	 */
 	protected EList<Transition> transition;
+
+	/**
+	 * The cached value of the '{@link #getInitialState() <em>Initial State</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitialState()
+	 * @generated
+	 * @ordered
+	 */
+	protected State initialState;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,6 +161,46 @@ public class StateMachineImpl extends MinimalEObjectImpl.Container implements St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public State getInitialState() {
+		if (initialState != null && initialState.eIsProxy()) {
+			InternalEObject oldInitialState = (InternalEObject) initialState;
+			initialState = (State) eResolveProxy(oldInitialState);
+			if (initialState != oldInitialState) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							StateMachinePackage.STATE_MACHINE__INITIAL_STATE, oldInitialState, initialState));
+			}
+		}
+		return initialState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public State basicGetInitialState() {
+		return initialState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInitialState(State newInitialState) {
+		State oldInitialState = initialState;
+		initialState = newInitialState;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StateMachinePackage.STATE_MACHINE__INITIAL_STATE,
+					oldInitialState, initialState));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -175,6 +226,10 @@ public class StateMachineImpl extends MinimalEObjectImpl.Container implements St
 			return getState();
 		case StateMachinePackage.STATE_MACHINE__TRANSITION:
 			return getTransition();
+		case StateMachinePackage.STATE_MACHINE__INITIAL_STATE:
+			if (resolve)
+				return getInitialState();
+			return basicGetInitialState();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,6 +254,9 @@ public class StateMachineImpl extends MinimalEObjectImpl.Container implements St
 			getTransition().clear();
 			getTransition().addAll((Collection<? extends Transition>) newValue);
 			return;
+		case StateMachinePackage.STATE_MACHINE__INITIAL_STATE:
+			setInitialState((State) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -220,6 +278,9 @@ public class StateMachineImpl extends MinimalEObjectImpl.Container implements St
 		case StateMachinePackage.STATE_MACHINE__TRANSITION:
 			getTransition().clear();
 			return;
+		case StateMachinePackage.STATE_MACHINE__INITIAL_STATE:
+			setInitialState((State) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -238,6 +299,8 @@ public class StateMachineImpl extends MinimalEObjectImpl.Container implements St
 			return state != null && !state.isEmpty();
 		case StateMachinePackage.STATE_MACHINE__TRANSITION:
 			return transition != null && !transition.isEmpty();
+		case StateMachinePackage.STATE_MACHINE__INITIAL_STATE:
+			return initialState != null;
 		}
 		return super.eIsSet(featureID);
 	}

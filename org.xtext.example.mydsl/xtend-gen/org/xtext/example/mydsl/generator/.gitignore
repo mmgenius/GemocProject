@@ -1,3 +1,6 @@
 /.MyDslGenerator.java._trace
 /.MyDslGenerator.xtendbin
 /MyDslGenerator.java
+/.StateAspect.java._trace
+/.StateMachineAspect.java._trace
+/.TransitionAspect.java._trace

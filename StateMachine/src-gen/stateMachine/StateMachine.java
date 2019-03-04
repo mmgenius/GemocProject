@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link stateMachine.StateMachine#getName <em>Name</em>}</li>
  *   <li>{@link stateMachine.StateMachine#getState <em>State</em>}</li>
  *   <li>{@link stateMachine.StateMachine#getTransition <em>Transition</em>}</li>
+ *   <li>{@link stateMachine.StateMachine#getInitialState <em>Initial State</em>}</li>
  * </ul>
  *
  * @see stateMachine.StateMachinePackage#getStateMachine()
@@ -82,5 +83,31 @@ public interface StateMachine extends EObject {
 	 * @generated
 	 */
 	EList<Transition> getTransition();
+
+	/**
+	 * Returns the value of the '<em><b>Initial State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Initial State</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Initial State</em>' reference.
+	 * @see #setInitialState(State)
+	 * @see stateMachine.StateMachinePackage#getStateMachine_InitialState()
+	 * @model
+	 * @generated
+	 */
+	State getInitialState();
+
+	/**
+	 * Sets the value of the '{@link stateMachine.StateMachine#getInitialState <em>Initial State</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Initial State</em>' reference.
+	 * @see #getInitialState()
+	 * @generated
+	 */
+	void setInitialState(State value);
 
 } // StateMachine

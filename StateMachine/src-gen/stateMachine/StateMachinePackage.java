@@ -94,13 +94,22 @@ public interface StateMachinePackage extends EPackage {
 	int STATE_MACHINE__TRANSITION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Initial State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_MACHINE__INITIAL_STATE = 3;
+
+	/**
 	 * The number of structural features of the '<em>State Machine</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_MACHINE_FEATURE_COUNT = 3;
+	int STATE_MACHINE_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>State Machine</em>' class.
@@ -131,22 +140,22 @@ public interface StateMachinePackage extends EPackage {
 	int STATE__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Target Out</b></em>' reference.
+	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__TARGET_OUT = 1;
+	int STATE__OUTGOING = 1;
 
 	/**
-	 * The feature id for the '<em><b>From In</b></em>' reference.
+	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__FROM_IN = 2;
+	int STATE__INCOMING = 2;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -213,13 +222,31 @@ public interface StateMachinePackage extends EPackage {
 	int TRANSITION__TARGET = 2;
 
 	/**
+	 * The feature id for the '<em><b>Action</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__ACTION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Trigger</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__TRIGGER = 4;
+
+	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = 3;
+	int TRANSITION_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Transition</em>' class.
@@ -274,6 +301,17 @@ public interface StateMachinePackage extends EPackage {
 	EReference getStateMachine_Transition();
 
 	/**
+	 * Returns the meta object for the reference '{@link stateMachine.StateMachine#getInitialState <em>Initial State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Initial State</em>'.
+	 * @see stateMachine.StateMachine#getInitialState()
+	 * @see #getStateMachine()
+	 * @generated
+	 */
+	EReference getStateMachine_InitialState();
+
+	/**
 	 * Returns the meta object for class '{@link stateMachine.State <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -295,26 +333,26 @@ public interface StateMachinePackage extends EPackage {
 	EAttribute getState_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link stateMachine.State#getTargetOut <em>Target Out</em>}'.
+	 * Returns the meta object for the reference list '{@link stateMachine.State#getOutgoing <em>Outgoing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target Out</em>'.
-	 * @see stateMachine.State#getTargetOut()
+	 * @return the meta object for the reference list '<em>Outgoing</em>'.
+	 * @see stateMachine.State#getOutgoing()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_TargetOut();
+	EReference getState_Outgoing();
 
 	/**
-	 * Returns the meta object for the reference '{@link stateMachine.State#getFromIn <em>From In</em>}'.
+	 * Returns the meta object for the reference list '{@link stateMachine.State#getIncoming <em>Incoming</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>From In</em>'.
-	 * @see stateMachine.State#getFromIn()
+	 * @return the meta object for the reference list '<em>Incoming</em>'.
+	 * @see stateMachine.State#getIncoming()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_FromIn();
+	EReference getState_Incoming();
 
 	/**
 	 * Returns the meta object for the attribute '{@link stateMachine.State#isStatus <em>Status</em>}'.
@@ -369,6 +407,28 @@ public interface StateMachinePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransition_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link stateMachine.Transition#getAction <em>Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Action</em>'.
+	 * @see stateMachine.Transition#getAction()
+	 * @see #getTransition()
+	 * @generated
+	 */
+	EAttribute getTransition_Action();
+
+	/**
+	 * Returns the meta object for the attribute '{@link stateMachine.Transition#getTrigger <em>Trigger</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Trigger</em>'.
+	 * @see stateMachine.Transition#getTrigger()
+	 * @see #getTransition()
+	 * @generated
+	 */
+	EAttribute getTransition_Trigger();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -428,6 +488,14 @@ public interface StateMachinePackage extends EPackage {
 		EReference STATE_MACHINE__TRANSITION = eINSTANCE.getStateMachine_Transition();
 
 		/**
+		 * The meta object literal for the '<em><b>Initial State</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE_MACHINE__INITIAL_STATE = eINSTANCE.getStateMachine_InitialState();
+
+		/**
 		 * The meta object literal for the '{@link stateMachine.impl.StateImpl <em>State</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -446,20 +514,20 @@ public interface StateMachinePackage extends EPackage {
 		EAttribute STATE__NAME = eINSTANCE.getState_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Target Out</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Outgoing</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE__TARGET_OUT = eINSTANCE.getState_TargetOut();
+		EReference STATE__OUTGOING = eINSTANCE.getState_Outgoing();
 
 		/**
-		 * The meta object literal for the '<em><b>From In</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Incoming</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE__FROM_IN = eINSTANCE.getState_FromIn();
+		EReference STATE__INCOMING = eINSTANCE.getState_Incoming();
 
 		/**
 		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
@@ -502,6 +570,22 @@ public interface StateMachinePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSITION__TARGET = eINSTANCE.getTransition_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Action</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION__ACTION = eINSTANCE.getTransition_Action();
+
+		/**
+		 * The meta object literal for the '<em><b>Trigger</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION__TRIGGER = eINSTANCE.getTransition_Trigger();
 
 	}
 

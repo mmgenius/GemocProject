@@ -11,6 +11,10 @@ import stateMachine.StateMachine
 import org.eclipse.emf.common.util.EList
 import stateMachine.State
 import stateMachine.Transition
+import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+import fr.inria.diverse.k3.al.annotationprocessor.Step
+import java.io.Console
+import java.util.Scanner
 
 /**
  * Generates code from your model files on save.
@@ -203,3 +207,77 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 }
 
+/*
+ * Tentative non fonctionnel d'utilisation de @Aspect
+ * J'ai essayer d'adapter les bouts de code pris chez certains camarades mais en vain.
+ * 
+ */
+
+@Aspect(className=typeof(StateMachine))
+class StateMachineAspect {
+	
+	public State currentState
+	public String underProcessTrigger
+	public String consummedString
+	
+	def public void initializeFSM() {
+		println("Initialisation")
+		_self.currentState = _self.state.findFirst[state|initialState == true];
+	}
+	
+	// Operational semantic
+	def void run() {
+		// reset if there is no current state
+		if (_self.currentState == null) {
+			_self.currentState = _self.state.findFirst[state|state.init == true];
+		}
+		
+		Boolean init = true;		
+		while(init){
+			System.out.print("Entrer la transition (on ou off) ou quitter (quit) : ");
+			scan = new Scanner(System.in);
+	        String choice = scan.next();
+	        
+	        switch (choice) {
+	        
+		        case "on":
+		        	on.changeState();
+		        	break;
+		        
+		        case "off":
+		        	off.changeState();
+		        	break;
+		        
+		        case "quit":
+		        	System.out.println("Au revoir !");
+		        	init = false;
+		        	break;
+		        
+		        default:
+		        	System.out.println("La transition saisie est incorrecte.");	
+	        }
+		}
+	}
+}
+
+@Aspect(className=typeof(Transition))
+class TransitionAspect {
+	@Step
+	def public String fire() {
+		println("from " + _self.origine.name + " to " + _self.target.name)
+		val fsm = _self.origine
+		fsm.currentState = _self.target
+		return _self.name
+	}
+}
+
+@Aspect(className=State)
+class StateAspect {
+	@Step
+	def public String step(String inputString) {
+		val validTransitions = _self.outgoing.filter[transition|inputString.compareTo(transition.name) == 0];
+		if (validTransitions.size > 0) {
+			return validTransitions.get(0).fire
+		}
+	}
+}

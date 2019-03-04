@@ -147,6 +147,15 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getStateMachine_InitialState() {
+		return (EReference) stateMachineEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getState() {
 		return stateEClass;
 	}
@@ -165,7 +174,7 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getState_TargetOut() {
+	public EReference getState_Outgoing() {
 		return (EReference) stateEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -174,7 +183,7 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getState_FromIn() {
+	public EReference getState_Incoming() {
 		return (EReference) stateEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -228,6 +237,24 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTransition_Action() {
+		return (EAttribute) transitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransition_Trigger() {
+		return (EAttribute) transitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public StateMachineFactory getStateMachineFactory() {
 		return (StateMachineFactory) getEFactoryInstance();
 	}
@@ -256,17 +283,20 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 		createEAttribute(stateMachineEClass, STATE_MACHINE__NAME);
 		createEReference(stateMachineEClass, STATE_MACHINE__STATE);
 		createEReference(stateMachineEClass, STATE_MACHINE__TRANSITION);
+		createEReference(stateMachineEClass, STATE_MACHINE__INITIAL_STATE);
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
-		createEReference(stateEClass, STATE__TARGET_OUT);
-		createEReference(stateEClass, STATE__FROM_IN);
+		createEReference(stateEClass, STATE__OUTGOING);
+		createEReference(stateEClass, STATE__INCOMING);
 		createEAttribute(stateEClass, STATE__STATUS);
 
 		transitionEClass = createEClass(TRANSITION);
 		createEAttribute(transitionEClass, TRANSITION__NAME);
 		createEReference(transitionEClass, TRANSITION__FROM);
 		createEReference(transitionEClass, TRANSITION__TARGET);
+		createEAttribute(transitionEClass, TRANSITION__ACTION);
+		createEAttribute(transitionEClass, TRANSITION__TRIGGER);
 	}
 
 	/**
@@ -310,14 +340,17 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 		initEReference(getStateMachine_Transition(), this.getTransition(), null, "transition", null, 0, -1,
 				StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStateMachine_InitialState(), this.getState(), null, "initialState", null, 0, 1,
+				StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_TargetOut(), this.getTransition(), this.getTransition_From(), "targetOut", null, 0, 1,
+		initEReference(getState_Outgoing(), this.getTransition(), this.getTransition_From(), "Outgoing", null, 0, -1,
 				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_FromIn(), this.getTransition(), this.getTransition_Target(), "fromIn", null, 0, 1,
+		initEReference(getState_Incoming(), this.getTransition(), this.getTransition_Target(), "incoming", null, 0, -1,
 				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Status(), ecorePackage.getEBoolean(), "status", null, 0, 1, State.class, !IS_TRANSIENT,
@@ -327,12 +360,16 @@ public class StateMachinePackageImpl extends EPackageImpl implements StateMachin
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Transition.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransition_From(), this.getState(), this.getState_TargetOut(), "from", null, 1, 1,
+		initEReference(getTransition_From(), this.getState(), this.getState_Outgoing(), "from", null, 0, 1,
 				Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransition_Target(), this.getState(), this.getState_FromIn(), "target", null, 1, 1,
+		initEReference(getTransition_Target(), this.getState(), this.getState_Incoming(), "target", null, 0, 1,
 				Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransition_Action(), ecorePackage.getEString(), "action", null, 0, 1, Transition.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransition_Trigger(), ecorePackage.getEString(), "trigger", null, 0, 1, Transition.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
